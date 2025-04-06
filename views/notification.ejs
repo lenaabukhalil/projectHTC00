@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .notification {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .unread {
+            background-color: #f0f7ff;
+            border-left: 3px solid #4a90e2;
+        }
+        .notification-icon {
+            margin-right: 15px;
+            font-size: 20px;
+            color: #4a90e2;
+        }
+        .notification-content {
+            flex: 1;
+        }
+        .notification-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .notification-message {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .notification-time {
+            font-size: 12px;
+            color: #999;
+        }
+        .mark-all {
+            color: #4a90e2;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Notifications</h1>
+            <span class="mark-all" onclick="markAllAsRead()">Mark all as read</span>
+        </div>
+        
+        <div id="notifications-list">
+            <!-- Notifications will be loaded here via JavaScript -->
+            <div class="empty-state">No notifications yet</div>
+        </div>
+    </div>
+
+    <script>
+        // Load notifications when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadNotifications();
+            
+            // Set up real-time updates with Socket.io
+            const socket = io();
+            socket.on('new_notification', () => {
+                loadNotifications();
+            });
+        });
+
+        // Fetch notifications from API
+        async function loadNotifications() {
+            try {
+                const response = await fetch('/api/notifications?unread=true');
+                const { notifications } = await response.json();
+                
+                const list = document.getElementById('notifications-list');
+                
+                if (notifications.length === 0) {
+                    list.innerHTML = '<div class="empty-state">No new notifications</div>';
+                    return;
+                }
+                
+                list.innerHTML = notifications.map(notif => `
+                    <div class="notification ${notif.is_read ? '' : 'unread'}" 
+                         onclick="markAsRead('${notif.id}', this)">
+                        <div class="notification-icon">
+                            ${getNotificationIcon(notif.type)}
+                        </div>
+                        <div class="notification-content">
+                            <div class="notification-title">${notif.type.replace('_', ' ')}</div>
+                            <div class="notification-message">${notif.message}</div>
+                            <div class="notification-time">${formatDate(notif.created_at)}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load notifications:', error);
+            }
+        }
+
+        // Mark single notification as read
+        async function markAsRead(notificationId, element) {
+            try {
+                await fetch(`/api/notifications/${notificationId}/read`, {
+                    method: 'POST'
+                });
+                
+                if (element) {
+                    element.classList.remove('unread');
+                }
+            } catch (error) {
+                console.error('Failed to mark as read:', error);
+            }
+        }
+
+        // Mark all notifications as read
+        async function markAllAsRead() {
+            try {
+                await fetch('/api/notifications/read-all', {
+                    method: 'POST'
+                });
+                await loadNotifications();
+            } catch (error) {
+                console.error('Failed to mark all as read:', error);
+            }
+        }
+
+        // Helper functions
+        function getNotificationIcon(type) {
+            const icons = {
+                'NEW_MESSAGE': '✉️',
+                'TASK_ASSIGNED': '✅',
+                'SYSTEM_ALERT': '⚠️'
+            };
+            return icons[type] || '🔔';
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+    </script>
+</body>
+</html>

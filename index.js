@@ -2,11 +2,21 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
+import { EventEmitter } from 'events';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Configure __dirname for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Increase event emitter limit
+EventEmitter.defaultMaxListeners = 20;
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-const port = 3000;
-
+// Database configuration
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -15,9 +25,170 @@ const db = new pg.Client({
   port: 5432,
 });
 
-db.connect();
+// Connect to database
+await db.connect();
+
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// ======================
+// NOTIFICATION SYSTEM
+// ======================
+
+// In-memory store for notifications (replace with DB in production)
+const notifications = new Map();
+
+// Notification types
+const NOTIFICATION_TYPES = {
+  NEW_MESSAGE: 'NEW_MESSAGE',
+  TASK_ASSIGNED: 'TASK_ASSIGNED',
+  SYSTEM_ALERT: 'SYSTEM_ALERT'
+};
+
+// Add notification
+function addNotification(userId, type, message, data = {}) {
+  if (!notifications.has(userId)) {
+    notifications.set(userId, []);
+  }
+  
+  const notification = {
+    id: Date.now(),
+    type,
+    message,
+    data,
+    timestamp: new Date(),
+    read: false
+  };
+  
+  notifications.get(userId).push(notification);
+  return notification;
+}
+
+// Mark notification as read
+function markAsRead(userId, notificationId) {
+  if (notifications.has(userId)) {
+    const notification = notifications.get(userId).find(n => n.id === notificationId);
+    if (notification) {
+      notification.read = true;
+      return true;
+    }
+  }
+  return false;
+}
+
+// Get user notifications
+function getUserNotifications(userId, unreadOnly = false) {
+  if (!notifications.has(userId)) {
+    return [];
+  }
+  
+  const userNotifications = notifications.get(userId);
+  return unreadOnly 
+    ? userNotifications.filter(n => !n.read)
+    : userNotifications;
+}
+
+// ======================
+// NOTIFICATION ROUTES
+// ======================
+
+// Get all notifications for user
+app.get('/api/notifications', async (req, res) => {
+  try {
+    // In a real app, get userId from session/token
+    const userId = req.query.userId || 'default-user';
+    const unreadOnly = req.query.unread === 'true';
+    
+    const userNotifications = getUserNotifications(userId, unreadOnly);
+    res.json({
+      success: true,
+      count: userNotifications.length,
+      notifications: userNotifications
+    });
+  } catch (err) {
+    console.error('Notification error:', err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// Mark notification as read
+app.post('/api/notifications/:id/read', async (req, res) => {
+  try {
+    const userId = req.query.userId || 'default-user';
+    const notificationId = parseInt(req.params.id);
+    
+    if (markAsRead(userId, notificationId)) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ success: false, error: 'Notification not found' });
+    }
+  } catch (err) {
+    console.error('Mark as read error:', err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// Create new notification (for testing)
+app.post('/api/notifications', async (req, res) => {
+  try {
+    const { userId, type, message } = req.body;
+    
+    if (!userId || !type || !message) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'userId, type and message are required' 
+      });
+    }
+    
+    const notification = addNotification(
+      userId, 
+      type, 
+      message,
+      req.body.data || {}
+    );
+    
+    res.json({ success: true, notification });
+  } catch (err) {
+    console.error('Create notification error:', err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// ======================
+// SOCKET.IO INTEGRATION (REAL-TIME)
+// ======================
+
+import { Server } from 'socket.io';
+import { createServer } from 'http';
+
+const server = createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  
+  // Join user to their own room
+  socket.on('join', (userId) => {
+    socket.join(userId);
+    console.log(`User ${userId} joined their notification room`);
+  });
+  
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
+// Function to send real-time notification
+function sendRealTimeNotification(userId, notification) {
+  io.to(userId).emit('new_notification', notification);
+}
+
 app.get("/first_p", (req, res) => {
   res.render("first_p.ejs");
 });
@@ -48,6 +219,9 @@ app.get("/CV", (req, res) => {
 });
 app.get("/task_std", (req, res) => {
   res.render("task_std.ejs");
+});
+app.get("/notification", (req, res) => {
+  res.render("notification.ejs");
 });
 app.get("/rating", (req, res) => {
   res.render("rating.ejs");
@@ -119,6 +293,9 @@ app.post('/first_p', (req, res) => {
 
 app.post('/register', (req, res) => {
   res.render('register.ejs'); // يعرض صفحة التسجيل الجديدة باسم 
+});
+app.post('/notification', (req, res) => {
+  res.render('notification.ejs'); // يعرض صفحة التسجيل الجديدة باسم 
 });
 
 app.post('/register4', (req, res) => {
@@ -270,8 +447,8 @@ client.connect();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "your_email@gmail.com", // استبدل ببريدك الإلكتروني
-    pass: "your_email_password", // استبدل بكلمة مرور البريد الإلكتروني
+    user: "lenabukhalil98@gmail.com", // Your Gmail address
+    pass: "uriw pemd gjmi udkz" // Your Gmail app password
   },
 });
 
@@ -398,13 +575,15 @@ app.get('/logout', (req, res) => {
   
     res.redirect('/login'); // إعادة التوجيه إلى صفحة تسجيل الدخول
   });
-
-
-
 // Start the server
-
-
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
+});
+
+process.on('SIGINT', async () => {
+  console.log('Closing server...');
+  await db.end();
+  server.close();
+  process.exit();
 });
 

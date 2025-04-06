@@ -580,6 +580,29 @@ footer {
     height: 50px; /* Adjust as necessary */
     width: auto;
 }
+.notification-icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.notification-icon img {
+  width: 100%;
+  height: auto;
+}
+
+.notification-icon #notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
 
 
     
@@ -606,7 +629,15 @@ footer {
                 <li><a href="/register">Sign Up</a></li>
             </ul>
             <div class="navbar-right">
-                <i class="fas fa-bell"></i> <!-- Icon for Notifications -->
+                <i class="fas fa-bell"> <!-- Icon for Notifications -->
+                <div id="notification-wrapper">
+                    <div class="notification-icon" onclick="markNotificationAsRead()">
+                      <img src="/images/bell.svg" alt="Notifications" />
+                      <span id="notification-badge" style="display: none;">1</span>
+                    </div>
+                  </div>
+                </i>
+                  
                 <a href="/profile" title="Profile" class="custom-link">
                     <i class="fas fa-user-circle"></i> <!-- Icon for User Profile -->
                 </a>
@@ -834,7 +865,38 @@ footer {
     // Clear the form
     document.getElementById('review-form').reset();
 });
-       
-    </script>
+         // This would typically come from server-side rendering or API
+  // Fetch notifications
+fetch('/api/notifications')
+  .then(res => {
+    if (!res.ok) throw new Error('Network error');
+    return res.json();
+  })
+  .then(data => {
+    const badge = document.getElementById('notification-badge');
+    if (badge && data.unread) {
+      badge.style.display = 'inline';
+    }
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+  });
+
+// Mark as read
+function markNotificationAsRead() {
+  fetch('/api/notifications/read', { 
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to update');
+    const badge = document.getElementById('notification-badge');
+    if (badge) badge.style.display = 'none';
+  })
+  .catch(error => {
+    console.error('Update error:', error);
+  });
+}
+</script>
 </body>
 </html>

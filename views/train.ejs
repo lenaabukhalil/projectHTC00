@@ -7,85 +7,148 @@
     <!-- Add Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+        
         /* General Styles */
+        :root {
+            --primary-blue: #231d6a;
+            --secondary-blue: #1e547a;
+            --dark-blue: #0859a5;
+            --light-blue: #caf0f8;
+            --gradient-blue: linear-gradient(135deg, #8aadff 0%, #140f46 100%);
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg,
+        #f5f7fa 0%,      /* Light gray */
+        #e4e9f2 15%,     /* Soft gray */
+        #d3dce6 30%,     /* Medium gray */
+        #c0cfe0 45%,     /* Blue-gray */
+        #a8c0ff 60%,     /* Baby blue */
+        #8fb3ff 75%,     /* Bright baby blue */
+        #a8c0ff 90%,     /* Baby blue */
+        #d3dce6 100%     /* Blue-gray */
+    );
             color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark-theme {
-            background-color: #1a1a2e;
-            color: #ffffff;
+            background: #112240;
+            color: #e6f1ff;
         }
 
         .container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(2, 52, 131, 0.15);
             width: 90%;
-            max-width: 800px;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            max-width: 850px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient-blue);
         }
 
         body.dark-theme .container {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #112240;
+            box-shadow: 0 15px 30px rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.1);
         }
 
         h1 {
-            color: #1a237e;
+            color: var(--primary-blue);
             text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
         }
 
         body.dark-theme h1 {
-            color: #ffffff;
+            color: #e6f1ff;
         }
 
         h2 {
-            color: #1a237e;
+            color: var(--primary-blue);
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid #1a237e;
-            padding-bottom: 0.5rem;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-blue);
+            border-radius: 50%;
+            margin-right: 12px;
         }
 
         body.dark-theme h2 {
-            color: #ffffff;
-            border-bottom-color: rgba(255, 255, 255, 0.2);
+            color: #e6f1ff;
         }
 
         .form-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(202, 240, 248, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-theme .form-section {
+            background: rgba(0, 53, 102, 0.2);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
+            position: relative;
         }
 
         label {
             display: block;
-            margin-bottom: 0.75rem;
-            color: #1a237e;
+            margin-bottom: 0.8rem;
+            color: var(--dark-blue);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
         }
 
         body.dark-theme label {
-            color: #ffffff;
+            color: #a8b2d1;
         }
 
         input[type="text"],
@@ -95,13 +158,14 @@
         select,
         textarea {
             width: 100%;
-            padding: 0.875rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
             color: #333;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         body.dark-theme input[type="text"],
@@ -110,9 +174,9 @@
         body.dark-theme input[type="date"],
         body.dark-theme select,
         body.dark-theme textarea {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            background-color: #0a192f;
+            border-color: #1e2a47;
+            color: #e6f1ff;
         }
 
         input[type="text"]:focus,
@@ -121,28 +185,29 @@
         input[type="date"]:focus,
         select:focus,
         textarea:focus {
-            border-color: #00b4d8;
-            box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.3);
             outline: none;
         }
 
         input[type="file"] {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s ease;
+            padding: 1rem;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            background-color: white;
+            transition: all 0.3s ease;
         }
 
         body.dark-theme input[type="file"] {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            background-color: #0a192f;
+            border-color: #1e2a47;
+            color: #e6f1ff;
         }
 
         input[type="file"]:hover {
-            border-color: #00b4d8;
+            border-color: var(--secondary-blue);
+            background-color: rgba(0, 180, 216, 0.05);
         }
 
         .radio-group {
@@ -152,62 +217,72 @@
 
         .radio-group label {
             font-weight: 500;
-            color: #333;
+            color: var(--dark-blue);
             font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--primary-blue);
         }
 
         body.dark-theme .radio-group label {
-            color: #ffffff;
+            color: #a8b2d1;
         }
 
         .submit-button,
         .reset-button {
-            background-color: #1a237e;
-            color: #ffffff;
-            padding: 0.875rem 1.75rem;
+            color: white;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 1.05rem;
             cursor: pointer;
             width: 48%;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        body.dark-theme .submit-button,
-        body.dark-theme .reset-button {
-            background-color: #00b4d8;
+        .submit-button {
+            background: var(--gradient-blue);
+            box-shadow: 0 4px 15px rgba(0, 97, 255, 0.3);
+        }
+
+        body.dark-theme .submit-button {
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
         }
 
         .reset-button {
-            background-color: #e53935;
-        }
-
-        body.dark-theme .reset-button {
-            background-color: #e63946;
+            background: #e63946;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
         }
 
         .submit-button:hover {
-            background-color: #0d47a1;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 97, 255, 0.4);
         }
 
         body.dark-theme .submit-button:hover {
-            background-color: #0077b6;
+            box-shadow: 0 8px 20px rgba(0, 180, 216, 0.4);
         }
 
         .reset-button:hover {
-            background-color: #c62828;
-            transform: translateY(-2px);
-        }
-
-        body.dark-theme .reset-button:hover {
-            background-color: #d90429;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+            background: #d90429;
         }
 
         .button-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         textarea {
@@ -218,93 +293,218 @@
         /* Theme Toggle Button */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #1a237e;
-            color: #ffffff;
+            top: 25px;
+            right: 25px;
+            background: var(--gradient-blue);
+            color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
+            width: 55px;
+            height: 55px;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px rgba(0, 97, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
         }
 
         body.dark-theme .theme-toggle {
-            background-color: #00b4d8;
+            box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3);
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(30deg);
         }
 
         .material-icons {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         /* Additional Links Section */
         .additional-links {
-            margin-top: 2rem;
+            margin-top: 3rem;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
         .additional-links a {
-            color: #1a237e;
+            color: var(--primary-blue);
             text-decoration: none;
             font-weight: 600;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(0, 97, 255, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
         body.dark-theme .additional-links a {
-            color: #ffffff;
+            color: #e6f1ff;
+            background: rgba(100, 200, 255, 0.1);
         }
 
         .additional-links a:hover {
-            color: #00b4d8;
+            background: rgba(0, 97, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .additional-links a:hover {
+            background: rgba(100, 200, 255, 0.2);
         }
 
         .additional-links a i {
-            margin-right: 0.5rem;
+            margin-right: 0.7rem;
+        }
+
+        /* Floating bubbles decoration */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.1);
+            z-index: -1;
+        }
+
+        .bubble-1 {
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .bubble-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -80px;
+            right: -80px;
+        }
+
+        /* Form group focus effect */
+        .form-group:focus-within label {
+            color: var(--secondary-blue);
+            transform: translateX(5px);
+        }
+
+        /* Custom select arrow */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230061ff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+        }
+
+        body.dark-theme select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300b4d8'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+        }
+
+        /* File upload styling */
+        .file-upload-container {
+            position: relative;
+        }
+
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme .file-upload-label {
+            border-color: #1e2a47;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--secondary-blue);
+            background: rgba(0, 180, 216, 0.05);
+        }
+
+        .file-upload-label i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-theme .file-upload-label i {
+            color: var(--secondary-blue);
+        }
+
+        .file-upload-text {
+            text-align: center;
+            color: var(--dark-blue);
+        }
+
+        body.dark-theme .file-upload-text {
+            color: #a8b2d1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .submit-button, .reset-button {
+                width: 100%;
+            }
+            
+            .additional-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Floating decorative bubbles -->
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" onclick="toggleTheme()">
-        <span class="material-icons">dark_mode</span> <!-- Moon Icon -->
+        <span class="material-icons">dark_mode</span>
     </button>
 
     <div class="container">
-        <h1>Training Form</h1>
+        <h1>Training Application</h1>
         <form>
             <div class="form-section">
                 <h2>Personal Information</h2>
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required aria-label="First Name">
+                    <input type="text" id="firstName" name="firstName" required aria-label="First Name" placeholder="Enter your first name">
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required aria-label="Last Name">
+                    <input type="text" id="lastName" name="lastName" required aria-label="Last Name" placeholder="Enter your last name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required aria-label="Email">
+                    <input type="email" id="email" name="email" required aria-label="Email" placeholder="example@email.com">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required aria-label="Phone Number" pattern="[0-9]{10}">
+                    <input type="tel" id="phone" name="phone" required aria-label="Phone Number" pattern="[0-9]{10}" placeholder="1234567890">
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" id="address" name="address" required aria-label="Address">
+                    <input type="text" id="address" name="address" required aria-label="Address" placeholder="Your full address">
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
@@ -312,7 +512,13 @@
                 </div>
                 <div class="form-group">
                     <label for="Profile">Profile Picture</label>
-                    <input type="file" id="Profile" name="Profile" required aria-label="Profile Picture">
+                    <div class="file-upload-container">
+                        <label for="Profile" class="file-upload-label">
+                            <i class="material-icons">cloud_upload</i>
+                            <span class="file-upload-text">Click to upload profile picture</span>
+                        </label>
+                        <input type="file" id="Profile" name="Profile" required aria-label="Profile Picture" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -321,6 +527,7 @@
                 <div class="form-group">
                     <label for="degree">Select Academic Degree</label>
                     <select id="degree" name="degree" required aria-label="Academic Degree">
+                        <option value="" disabled selected>Select your degree</option>
                         <option value="Bachelor">Bachelor</option>
                         <option value="Master">Master</option>
                         <option value="PhD">PhD</option>
@@ -330,15 +537,16 @@
                 </div>
                 <div class="form-group">
                     <label for="university">University</label>
-                    <input type="text" id="university" name="university" required aria-label="University">
+                    <input type="text" id="university" name="university" required aria-label="University" placeholder="University name">
                 </div>
                 <div class="form-group">
                     <label for="major">Major</label>
-                    <input type="text" id="major" name="major" required aria-label="Major">
+                    <input type="text" id="major" name="major" required aria-label="Major" placeholder="Your field of study">
                 </div>
                 <div class="form-group">
                     <label for="gpa">GPA</label>
                     <select id="gpa" name="gpa" required aria-label="GPA">
+                        <option value="" disabled selected>Select your GPA</option>
                         <option value="Satisfactory">Satisfactory</option>
                         <option value="Good">Good</option>
                         <option value="Very Good">Very Good</option>
@@ -352,6 +560,7 @@
                 <div class="form-group">
                     <label for="trainingType">Type of Training</label>
                     <select id="trainingType" name="trainingType" required aria-label="Type of Training">
+                        <option value="" disabled selected>Select training type</option>
                         <option value="Hardware Services">Hardware Services</option>
                         <option value="Software Services">Software Services</option>
                         <option value="Cloud Services">Cloud Services</option>
@@ -359,20 +568,38 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="trainingRequest">Upload University Training Request</label>
-                    <input type="file" id="trainingRequest" name="trainingRequest" required aria-label="University Training Request">
+                    <label for="trainingRequest">University Training Request</label>
+                    <div class="file-upload-container">
+                        <label for="trainingRequest" class="file-upload-label">
+                            <i class="material-icons">description</i>
+                            <span class="file-upload-text">Upload university request letter</span>
+                        </label>
+                        <input type="file" id="trainingRequest" name="trainingRequest" required aria-label="University Training Request" style="display: none;">
+                    </div>
                 </div>
             </div>
 
             <div class="form-section">
                 <h2>Additional Uploads</h2>
                 <div class="form-group">
-                    <label for="personalID">Upload Personal ID</label>
-                    <input type="file" id="personalID" name="personalID" required aria-label="Personal ID">
+                    <label for="personalID">Personal ID</label>
+                    <div class="file-upload-container">
+                        <label for="personalID" class="file-upload-label">
+                            <i class="material-icons">badge</i>
+                            <span class="file-upload-text">Upload your ID document</span>
+                        </label>
+                        <input type="file" id="personalID" name="personalID" required aria-label="Personal ID" style="display: none;">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="transcripts">Upload University Transcripts</label>
-                    <input type="file" id="transcripts" name="transcripts" required aria-label="University Transcripts">
+                    <label for="transcripts">University Transcripts</label>
+                    <div class="file-upload-container">
+                        <label for="transcripts" class="file-upload-label">
+                            <i class="material-icons">school</i>
+                            <span class="file-upload-text">Upload your academic transcripts</span>
+                        </label>
+                        <input type="file" id="transcripts" name="transcripts" required aria-label="University Transcripts" style="display: none;">
+                    </div>
                 </div>
             </div>
 
@@ -380,13 +607,19 @@
                 <h2>Additional Information</h2>
                 <div class="form-group">
                     <label for="comments">Comments</label>
-                    <textarea id="comments" name="comments" rows="4" aria-label="Comments"></textarea>
+                    <textarea id="comments" name="comments" rows="4" aria-label="Comments" placeholder="Any additional information you'd like to share..."></textarea>
                 </div>
             </div>
 
             <div class="button-group">
-                <button type="submit" class="submit-button">Submit Application</button>
-                <button type="reset" class="reset-button">Reset Form</button>
+                <button type="submit" class="submit-button">
+                    <i class="material-icons">send</i>
+                    Submit Application
+                </button>
+                <button type="reset" class="reset-button">
+                    <i class="material-icons">refresh</i>
+                    Reset Form
+                </button>
             </div>
         </form>
 
@@ -404,11 +637,41 @@
             document.body.classList.toggle('dark-theme');
             const themeToggle = document.querySelector('.theme-toggle .material-icons');
             if (document.body.classList.contains('dark-theme')) {
-                themeToggle.textContent = 'light_mode'; // Sun Icon
+                themeToggle.textContent = 'light_mode';
+                localStorage.setItem('theme', 'dark');
             } else {
-                themeToggle.textContent = 'dark_mode'; // Moon Icon
+                themeToggle.textContent = 'dark_mode';
+                localStorage.setItem('theme', 'light');
             }
         }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.querySelector('.theme-toggle .material-icons').textContent = 'light_mode';
+        }
+
+        // Add animation to form sections on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const formSections = document.querySelectorAll('.form-section');
+            formSections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+
+        // Add focus effects to form elements
+        const formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('focused');
+            });
+        });
     </script>
 </body>
 </html>
