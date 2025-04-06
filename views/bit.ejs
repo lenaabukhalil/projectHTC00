@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT Certificates</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #003366 50%, #00aaff 50%);
+            color: white;
+        }
+        header {
+            text-align: center;
+            padding: 2em 1em;
+            background-color: #003366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        .container {
+            margin: 2em auto;
+            padding: 20px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .certificate {
+            background: white;
+            color: #003366;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .certificate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .certificate h2 {
+            font-size: 1.5rem;
+            margin: 1em;
+        }
+        .certificate p {
+            margin: 0.5em 1em;
+            line-height: 1.5;
+        }
+        .certificate strong {
+            color: #00aaff;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1em;
+        }
+        .enroll-btn {
+            padding: 12px;
+            background-color: #00aaff;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 150px;
+        }
+        .enroll-btn:hover {
+            background-color: #003366;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BIT Certificates</h1>
+    </header>
+    <div class="container">
+        <div class="certificate">
+            <h2>Certified Business Analysis Professional (CBAP)</h2>
+            <p><strong>Description:</strong> CBAP is a professional certification for experienced business analysts. It demonstrates your expertise in business analysis practices, including requirements gathering, process analysis, and solution design. This certification is ideal for those aiming for roles such as senior business analyst or business analysis consultant.</p>
+            <p><strong>Duration:</strong> Approximately 4-6 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $450 USD for members, $575 USD for non-members.</p>
+            <p><strong>How to Enroll:</strong> Visit the official IIBA CBAP Certification page, create an account, and submit your application. You can find study materials, exam outlines, and preparation resources on the same platform.</p>
+            <div class="button-container">
+                <a href="https://go.iiba.org/CBAP-Special-Offer" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Certified Information Systems Auditor (CISA)</h2>
+            <p><strong>Description:</strong> CISA is a globally recognized certification that validates your skills in auditing, control, and security of information systems. It prepares professionals for roles such as IT auditor, security consultant, or systems auditor, focusing on IT governance, risk management, and security protocols.</p>
+            <p><strong>Duration:</strong> Approximately 3-5 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $760 USD for ISACA members, $1,045 USD for non-members.</p>
+            <p><strong>How to Enroll:</strong> Visit the official ISACA CISA Certification page, create an account, and schedule your exam. Study materials and practice exams are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://www.isaca.org/credentialing/cisa" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Microsoft Certified: Azure Fundamentals</h2>
+            <p><strong>Description:</strong> This certification demonstrates your foundational knowledge of cloud services and how those services are provided with Microsoft Azure. It is ideal for individuals starting their cloud journey and covers basics such as cloud concepts, Azure services, pricing, and support.</p>
+            <p><strong>Duration:</strong> Approximately 1-2 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $99 USD.</p>
+            <p><strong>How to Enroll:</strong> Visit the official Microsoft Azure Fundamentals Certification page, create an account, and schedule your exam. You can find free learning paths, study resources, and practice tests on the same platform.</p>
+            <div class="button-container">
+                <a href="https://learn.microsoft.com/en-us/certifications/azure-fundamentals/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

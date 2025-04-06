@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a4e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/css/BSUP.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .all {
+            width: 70%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(47, 47, 95, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+            text-align: center;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .input1 {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input1 input,
+        .input1 select {
+            width: 100%;
+            padding: 14px 40px 14px 15px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            background: rgba(245, 245, 245, 0.85);
+            color: #333;
+            font-size: 18px;
+            transition: 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input1 input:focus {
+            border: 2px solid #dddddd;
+            box-shadow: 0 0 10px rgba(173, 173, 173, 0.6);
+        }
+
+        .input1 select {
+            background: rgba(245, 245, 245, 0.85);
+        }
+
+        .input1 i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 24px;
+        }
+
+        .sub {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #000000;
+            border-radius: 25px;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 18px;
+            font-weight: bolder;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sub:hover {
+            background-color: #9a9a9a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="all">
+        <form action="/register3" method="POST">
+            <h1><b>Sign Up</b></h1>
+              <div class="input1">
+                <select name="city" required>
+                    <option value="" disabled selected>Select your City</option>
+                    <option value="Irbid">Irbid</option>
+                    <option value="Amman">Amman</option>
+                    <option value="Zarqa">Zarqa</option>
+                </select>
+                <i class='bx bx-map'></i>
+            </div>
+            <div class="input1">
+                <select name="university" required>
+                    <option value="" disabled selected>Select your University</option>
+                    <option value="Hashemite University">Hashemite University</option>
+                    <option value="Jordan University">Jordan University</option>
+                    <option value="JUST">JUST</option>
+                </select>
+                
+                <i class='bx bx-building'></i>
+            </div>
+            <div class="input1">
+                <input type="number" name="gpa" placeholder="Enter your GPA" min="1" max="4" step="0.1" required>
+                <i class='bx bx-graduation'></i>
+            </div>
+
+            <div class="input1">
+                <select name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <i class='bx bx-male-female'></i>
+            </div>
+            <div class="input1">
+                <select name="specialization" required>
+                    <option value="" disabled selected>Select Specialization</option>
+                    <option value="software_engineering">Software Engineering</option>
+                    <option value="networking">Networking</option>
+                    <option value="cyber_security">Cyber Security</option>
+                    <option value="data_science">Data Science</option>
+                    <option value="artificial_intelligence">Artificial Intelligence</option>
+                    <option value="information_systems">Information Systems</option>
+                </select>
+            </div>
+            <input type="submit" class="sub" value="Sign Up">
+            
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTC - Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+     <!-- Google Fonts -->
+     <link href="https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap" rel="stylesheet">
+     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            color: rgb(0, 0, 0);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 3px 20px;
+            background-color: #003366;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(131, 214, 237, 0.5);
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            margin-left: 800px;
+            margin-top: 8px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(110, 181, 255, 0.2);
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden by default */
+            z-index: 9999;
+        }
+
+        .profile-section {
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        .profile-img2 {
+            width: 125px;
+            height: 120px;
+            border-radius: 50%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-name {
+            font-weight: bold;
+        }
+
+        .profile-info {
+            font-size: 14px;
+        }
+
+        .dropdown-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .dropdown-links li a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .dropdown-links li a:hover {
+            background-color: #f0f0f0;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .admin-dashboard {
+            padding: 50px;
+            background-color: #f4f4f4;
+            margin-top: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .stat-card {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-item {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .stat-item h3 {
+            color: #003366;
+        }
+
+        .stat-item p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        /* User profile table */
+        .user-profile-table th, .user-profile-table td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .user-profile-table th {
+            background-color: #003366;
+            color: white;
+        }
+
+        .user-profile-table td {
+            background-color: #f9f9f9;
+        }
+
+        .user-profile-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span>&#9776;</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="companies">Companies</a></li>
+            <li><a href="courses">Courses</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Sign Up</a></li>
+        </ul>
+        <div class="navbar-right">
+            <i class="fas fa-bell"></i> <!-- Icon for Notifications -->
+            <a href="/profile" title="Profile" class="custom-link">
+            <i class="fas fa-user-circle"></i> <!-- Icon for User Profile -->
+            </a>
+        </div>
+    </nav>
+</header>
+
+<!-- Admin Dashboard Content -->
+<div class="admin-dashboard">
+    <h2 class="text-center mb-4">Admin Dashboard</h2>
+
+    <!-- Stats Cards -->
+    <div class="stat-card">
+        <!-- Stat Item for Number of Logins -->
+        <div class="stat-item">
+            <h3>Users Logged in Today</h3>
+            <p>120</p>
+        </div>
+
+        <!-- Stat Item for Users with Training -->
+        <div class="stat-item">
+            <h3>Users with Training</h3>
+            <p>85</p>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <h3 class="card-title">Overall System Stats</h3>
+        <p class="card-text">
+            Track the number of users logging in and their training status. These stats help you understand the engagement and usage of the system by the users.
+        </p>
+    </div>
+
+    <div class="dashboard-card">
+        <h3 class="card-title">User Activity</h3>
+        <p class="card-text">
+            Monitoring user activity gives you an insight into how often users interact with the platform, especially focusing on how they progress through training.
+        </p>
+    </div>
+
+    <!-- User Profiles Table -->
+    <div class="dashboard-card">
+        <h3 class="card-title">User Profiles</h3>
+        <p class="card-text">Here you can find the user information, including their profile, login activity, and training participation.</p>
+        
+        <table class="table user-profile-table">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Training Sessions Attended</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows (this should be dynamically generated) -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>johndoe@example.com</td>
+                    <td>5</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>janesmith@example.com</td>
+                    <td>3</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>Michael Lee</td>
+                    <td>michaellee@example.com</td>
+                    <td>8</td>
+                    <td>Active</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 HTC. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap and JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    function toggleMenu() {
+        var dropdownMenu = document.getElementById("dropdown-menu");
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
+        }
+    }
+    
+    document.addEventListener('click', function(event) {
+        var dropdownMenu = document.getElementById("dropdown-menu");
+        var menuIcon = document.querySelector('.menu-icon');
+        if (!menuIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

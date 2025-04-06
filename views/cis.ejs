@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIS Certificates</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #003366 50%, #00aaff 50%);
+            color: white;
+        }
+        header {
+            text-align: center;
+            padding: 2em 1em;
+            background-color: #003366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        .container {
+            margin: 2em auto;
+            padding: 20px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .certificate {
+            background: white;
+            color: #003366;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .certificate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .certificate h2 {
+            font-size: 1.5rem;
+            margin: 1em;
+        }
+        .certificate p {
+            margin: 0.5em 1em;
+            line-height: 1.5;
+        }
+        .certificate strong {
+            color: #00aaff;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1em;
+        }
+        .enroll-btn {
+            padding: 12px;
+            background-color: #00aaff;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 150px;
+        }
+        .enroll-btn:hover {
+            background-color: #003366;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CIS Certificates</h1>
+    </header>
+    <div class="container">
+        <div class="certificate">
+            <h2>Microsoft Certified: Azure Database Administrator</h2>
+            <p><strong>Description:</strong> This certification demonstrates your expertise in managing and administering cloud databases on Microsoft Azure. It covers areas such as implementing and managing database solutions, ensuring high availability, optimizing performance, and securing database systems on Azure.</p>
+            <p><strong>Duration:</strong> Approximately 2-4 months of study, depending on your prior experience and study pace.</p>
+            <p><strong>Cost:</strong> Exam fee is $165 USD.</p>
+            <p><strong>How to Enroll:</strong> Visit the official Microsoft Certification page, create an account, and schedule your exam. Preparation materials and practice tests are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://www.globalknowledge.com/us-en/training/certification-prep/brands/microsoft/section/data-ai/microsoft-certified-azure-database-administrator-associate/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>SAP Certified Technology Associate</h2>
+            <p><strong>Description:</strong> This certification demonstrates your expertise in implementing and configuring SAP solutions. It covers key areas like SAP HANA, system administration, and managing SAP landscapes, ensuring that you have the skills to support SAP systems effectively.</p>
+            <p><strong>Duration:</strong> Approximately 2-4 months of study, depending on your prior experience and study pace.</p>
+            <p><strong>Cost:</strong> Exam fee is $500 USD.</p>
+            <p><strong>How to Enroll:</strong> Visit the official SAP Certification page, create an account, and schedule your exam. Preparation materials and courses are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://training.sap.com/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Oracle Database Administrator Certified Professional</h2>
+            <p><strong>Description:</strong> This certification validates your skills in managing Oracle databases, including installation, configuration, backup, recovery, performance tuning, and security management for large-scale database systems.</p>
+            <p><strong>Duration:</strong> Approximately 3-6 months of study, depending on your prior experience and study pace.</p>
+            <p><strong>Cost:</strong> Exam fee is $245 USD.</p>
+            <p><strong>How to Enroll:</strong> Visit the official Oracle Certification page, create an account, and schedule your exam. Preparation resources, including training courses and practice exams, are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://education.oracle.com/oracle-database-administration-2019-certified-professional/trackp_DB19COCP" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

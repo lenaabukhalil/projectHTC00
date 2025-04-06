@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- تحميل Font Awesome بشكل صحيح -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Training Website</title>
+    <style>
+        /* Reset styles */
+       
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            color: rgb(0, 0, 0);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+  
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            background-color: #003366;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(131, 214, 237, 0.5);
+            
+        }
+
+      
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+       
+        .nav-links {
+            display: flex;
+            list-style: none;
+            
+            gap: 40px;
+            margin-left: 800px;
+            margin-top: -4px;
+           
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(110, 181, 255, 0.2);
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        /* Icons */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 20px;
+        }
+
+        .navbar-right i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .custom-link {
+    color: white;
+    text-decoration: none;
+}
+
+.custom-link:hover {
+    color: #ddd; /* لون مختلف عند التحويم */
+}
+
+
+
+        .dropdown-menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 9999;
+}
+
+.profile-section {
+    padding: 10px;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+}
+
+
+.profile-img2 {
+    width: 125px; /* الحجم الأساسي للصورة */
+    height: 120px;
+    border-radius: 50%;
+    margin-top:10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+
+}
+
+.profile-name {
+    font-weight: bold;
+}
+
+.profile-info {
+    font-size: 14px;
+}
+
+.dropdown-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dropdown-links li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.dropdown-links li a:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-links li a:last-child {
+    color: rgb(0, 0, 0);
+}
+
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            
+            height: 100vh;
+            background: url('/css/F_page.png') no-repeat center; /* Added no-repeat and center */
+            background-size: cover;
+
+            padding: 20px;
+        }
+
+        .hero-overlay {
+            display: flex;
+            gap: 30px;
+            z-index: 2;
+        }
+
+        .hero-text {
+           
+            max-width: 70%;
+            margin-left: 30px;
+            text-align: left;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-text h2 {
+            font-size: 1.8em;
+            color: #6EB5FF;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-text p {
+            font-size: 1em;
+            line-height: 1.5;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-image {
+            width: 70%;
+            max-width: 350px;
+            height: 70%;
+            max-height: 350px;
+            margin-left: auto;
+            overflow: hidden;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.1);
+            opacity: 0.95;
+        }
+       
+        .h1h{
+            color:white;
+        }
+            
+
+/* Logo Styling */
+.navbar .logo-container {
+    display: inline-block;
+    padding-right: 15px; /* Add spacing if necessary */
+}
+
+.navbar .logo {
+    height: 50px; /* Adjust as necessary */
+    width: auto;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+<header>
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+     <div class="menu-icon" onclick="toggleMenu()">
+         <span>&#9776;</span>
+     </div>
+     <div class="logo-container">
+      <!-- Logo Image -->
+      <img src="https://i.pinimg.com/736x/33/37/ee/3337eeff3be1747f984d9d8e59eeb1c1.jpg" alt="Logo" class="logo">
+
+</div>
+ 
+     <ul class="nav-links">
+         <li><a href="/home">Home</a></li>
+         <li><a href="companies">Companies</a></li>
+          <li><a href="/certi-0">Certificates</a></li>
+          <li><a href="/courses">Courses</a></li>
+          <li><a href="/login">Login</a></li>
+         <li><a href="/register">Sign Up</a></li>
+        
+     </ul>
+ 
+     <div class="navbar-right">
+         <i class="fas fa-bell"></i> <!-- Icon for Notifications -->
+         <a href="/profile" title="Profile" class="custom-link">
+         <i class="fas fa-user-circle"></i> <!-- Icon for User Profile -->
+         </a>
+     </div>
+
+     <!-- Dropdown menu structure -->
+     <div id="dropdown-menu" class="dropdown-menu">
+         <div class="profile-section">
+             <img src="https://i.pinimg.com/736x/86/29/58/862958e10f4badc47cb0947dec13ad49.jpg" alt="Profile Picture" class="profile-img2"><br>
+             <span class="profile-name">Leen Samer Al-Suradi</span>
+             <span class="profile-info">Computer Information Systems<br>2145088</span>
+         </div>
+         <ul class="dropdown-links">
+            <li><a href="companies">Companies</a></li>
+            <li><a href="cv">CV</a></li>
+            <li><a href="courses">Courses</a></li>
+            <li><a href="task_std">Student Task</a></li>
+            <li><a href="rating">Student Rating</a></li>
+            <li><a href="certi-0">certificate</a></li>
+            <li><a href="settings">Settings</a></li>
+            <li><a href="contact">Contact Us</a></li>
+            <li><a href="logout" style="color: red;">Logout</a></li>
+        </ul>
+     </div>
+ </nav>
+
+</header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h1 class="h1h">Transforming Ideas into Reality</h1>
+                <h2>Hashimate University Training</h2>
+                <p class="h1h">A training website for IT college students that connects them with practical training opportunities to enhance their skills.</p>
+            </div>
+           
+        </div>
+    </section>
+   <script>
+    function toggleMenu() {
+        var dropdownMenu = document.getElementById("dropdown-menu");
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
+        }
+    }
+    
+    document.addEventListener('click', function(event) {
+        var dropdownMenu = document.getElementById("dropdown-menu");
+        var menuIcon = document.querySelector('.menu-icon');
+        if (!menuIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 3px 20px;
+            background-color: #003366;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(131, 214, 237, 0.5);
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            margin-left: auto;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(110, 181, 255, 0.2);
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 20px;
+        }
+
+        .navbar-right i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .custom-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        .custom-link:hover {
+            color: #ddd;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #004080;
+            color: #ffffff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            font-weight: 700;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            color: #004080;
+            background: linear-gradient(to right, #ffffff, #b3d1ff);
+            border-left: 5px solid #004080;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .footer-section a {
+            color: #40E0D0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffffff;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin: 10px 0;
+        }
+
+        .footer-section ul li a {
+            color: #40E0D0;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .social-media {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-media ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-media ul li a {
+            color: #ffffff;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-media ul li a:hover {
+            color: #f39c12;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ffffff;
+            font-size: 16px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Task Details */
+        .task-details {
+            padding: 25px;
+        }
+
+        .task-details h3 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+
+        .task-details p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .task-details p strong {
+            color: #003366;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            margin: 15px 0;
+        }
+
+        progress {
+            width: 100%;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            margin-top: 20px;
+        }
+
+        .feedback-section textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .submit-feedback-btn {
+            margin-top: 10px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            padding: 20px;
+            background: #f9f9f9;
+            text-align: center;
+            border-top: 2px solid #003366;
+        }
+
+        .upload-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .upload-section input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .upload-section input[type="file"]:hover {
+            border-color: #0055a5;
+        }
+
+        .upload-btn {
+            margin-top: 15px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #0055a5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Task Progress Section */
+.progress-bar {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.progress-bar label {
+    font-size: 18px;
+    color: #003366;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    border: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #003366;
+    border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+    background-color: #003366;
+    border-radius: 10px;
+}
+
+#progress-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.update-progress-btn {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 8px 15px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px; /* Reduced margin */
+    transition: all 0.3s ease;
+}
+
+.update-progress-btn:hover {
+    background-color: #0055a5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+        /* Task History Section */
+        .task-history {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-top: 2px solid #003366;
+        }
+
+        .task-history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-history li {
+            margin: 10px 0;
+        }
+
+        /* Timer Section */
+        .task-timer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 24px;
+            color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul class="nav-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/companies">Companies</a></li>
+            <li><a href="/certificates">Certificates</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/Sign Up">Sign UP</a></li>
+        </ul>
+        <div class="navbar-right">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user"></i>
+        </div>
+    </nav>
+
+    <!-- Task Container -->
+    <div class="container">
+        <div class="task-details">
+            <h3>Task Title: Build a Responsive Web Page</h3>
+            <p><strong>Description:</strong> Develop a full-stack web application using React for the frontend and Node.js with Express for the backend. The application should include user authentication, data management, and integrate a third-party API to fetch and display dynamic data. The system should handle both front-end routing and back-end database operations with MongoDB. Ensure the application is secure, scalable, and well-documented. Include unit and integration tests for both frontend and backend components, and deploy the final product on a cloud service (e.g., Heroku or AWS).</p>
+            <p><strong>Deadline:</strong> December 31, 2024</p>
+            <p><strong>Status:</strong> Pending</p>
+
+            <!-- Task Priority -->
+            <p><strong>Priority:</strong> High</p>
+
+           <!-- Task Progress -->
+<div class="progress-bar">
+    <label for="task-progress">Task Progress</label>
+    <progress id="task-progress" value="0" max="100">0%</progress>
+    <span id="progress-text">0% Complete</span>
+
+    <div>
+        <button class="update-progress-btn" onclick="updateProgress(25)">25% Completed</button>
+        <button class="update-progress-btn" onclick="updateProgress(50)">50% Completed</button>
+        <button class="update-progress-btn" onclick="updateProgress(75)">75% Completed</button>
+        <button class="update-progress-btn" onclick="updateProgress(100)">100% Completed</button>
+    </div>
+</div>
+
+
+            <!-- Mentor Feedback Section -->
+            <div class="feedback-section">
+                <h4>Mentor Feedback:</h4>
+                <textarea rows="4" placeholder="Leave your feedback here..."></textarea>
+                <button class="submit-feedback-btn">Submit Feedback</button>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <label for="task-upload">Upload your completed task:</label>
+            <input type="file" id="task-upload" multiple>
+            <button class="upload-btn" onclick="uploadTask()">Upload Task</button>
+        </div>
+
+        <!-- Task History Section -->
+        <div class="task-history">
+            <h4>Task History</h4>
+            <ul>
+                <li><strong>Task 1:</strong> Completed - <em>Feedback: Good work, keep it up!</em></li>
+                <li><strong>Task 2:</strong> Pending - <em>Feedback: Needs more attention to detail.</em></li>
+            </ul>
+        </div>
+
+        <!-- Task Timer Section -->
+       
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    
+        <div class="footer-bottom">
+            &copy; 2024 IT Training Hub. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Task Upload Script
+        function uploadTask() {
+            const fileInput = document.getElementById('task-upload');
+            if (fileInput.files.length === 0) {
+                alert('Please select a file to upload!');
+            } else {
+                alert('Task uploaded successfully!');
+            }
+        }
+
+        // Function to update the progress bar
+function updateProgress(value) {
+    const progressBar = document.getElementById('task-progress');
+    const progressText = document.getElementById('progress-text');
+    progressBar.value = value;
+    progressText.innerHTML = '${value}% Complete';
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Certificates</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #003366 50%, #00aaff 50%);
+            color: white;
+        }
+        header {
+            text-align: center;
+            padding: 2em 1em;
+            background-color: #003366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        .container {
+            margin: 2em auto;
+            padding: 20px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .certificate {
+            background: white;
+            color: #003366;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .certificate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .certificate h2 {
+            font-size: 1.5rem;
+            margin: 1em;
+        }
+        .certificate p {
+            margin: 0.5em 1em;
+            line-height: 1.5;
+        }
+        .certificate strong {
+            color: #00aaff;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1em;
+        }
+        .enroll-btn {
+            padding: 12px;
+            background-color: #00aaff;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 150px;
+        }
+        .enroll-btn:hover {
+            background-color: #003366;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Certificates</h1>
+    </header>
+    <div class="container">
+        <div class="certificate">
+            <h2>IBM AI Engineering Professional Certificate</h2>
+            <p><strong>Description:</strong> This certification equips you with the skills to design, build, and deploy AI-based applications. It covers machine learning, deep learning, and neural networks, and prepares you to solve real-world problems using AI technologies.</p>
+            <p><strong>Duration:</strong> Approximately 3-6 months of study, depending on your prior experience and study pace.</p>
+            <p><strong>Cost:</strong> The program costs around $39/month on Coursera (total cost depends on how long it takes to complete the course).</p>
+            <p><strong>How to Enroll:</strong> Visit the official IBM AI Engineering Professional Certificate page on Coursera, create an account, and start the course. The platform offers flexibility in learning, with video lectures, quizzes, and hands-on projects.</p>
+            <div class="button-container">
+                <a href="https://www.ibm.com/blogs/ibm-training/unlock-a-career-as-an-ai-developer-with-ibm-on-coursera/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Google Cloud Professional Machine Learning Engineer</h2>
+            <p><strong>Description:</strong> This certification demonstrates your ability to design, build, and productionize machine learning models on Google Cloud. It covers key areas such as data engineering, ML model design, implementation, and scaling.</p>
+            <p><strong>Duration:</strong> Approximately 3-4 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $200 USD.</p>
+            <p><strong>How to Enroll:</strong>  Visit the official Google Cloud Professional Machine Learning Engineer Certification page, create an account, and schedule your exam. Preparation materials and practice exams are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://cloud.google.com/certification/machine-learning-engineer" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Microsoft Certified: Azure AI Engineer Associate</h2>
+            <p><strong>Description:</strong> This certification validates your skills in using Azure AI services, including machine learning, computer vision, natural language processing, and conversational AI. It prepares you to implement AI solutions on Microsoft Azure.</p>
+            <p><strong>Duration:</strong> Approximately 2-4 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $165 USD.</p>
+            <p><strong>How to Enroll:</strong> Visit the official Microsoft Certification page, create an account, and schedule your exam. Preparation resources and practice tests are available on the same platform.</p>
+            <div class="button-container">
+                <a href="https://learn.microsoft.com/en-us/certifications/azure-ai-engineer/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

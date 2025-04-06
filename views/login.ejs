@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <!-- تضمين Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif; /* تغيير الخط إلى regular */
+        background-color: #1a1a4e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('/css/BSUP.png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .all {
+        width: 100%;
+        max-width: 450px;
+        padding: 40px;
+        background: rgba(47, 47, 95, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+        text-align: center;
+        color: #fff;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+        font-weight: bold;
+        color: #ffffff; /* اللون الأصفر كما في الـ Sign Up */
+    }
+
+    .input1 {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .input1 input {
+        width: 100%;
+        padding: 14px 40px 14px 15px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        background: #fff;
+        color: #333;
+        font-size: 18px;
+        transition: 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .input1 input:focus {
+        border: 2px solid #dddddd; /* نفس اللون الأصفر عند التركيز */
+        box-shadow: 0 0 10px rgba(173, 173, 173, 0.6);
+    }
+
+    .input1 i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+    }
+
+    .sub {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #000000; 
+        border-radius: 25px;
+        background-color: #ffffff; /* نفس اللون الأصفر في الزر */
+        color: #333;
+        font-size: 18px;
+        font-weight: bolder;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sub:hover {
+        background-color: #9a9a9a; /* تدرج اللون الأصفر عند التحويم */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .remember-forget label {
+        color: #fff; /* تغيير لون النص "Remember me" إلى الأبيض */
+        margin-left: 10px;
+        display: flex;
+        align-items: center; /* تأكد من محاذاة العناصر رأسياً */
+        gap: 15px; 
+    }
+
+    .remember-forget a {
+        color: #007bff; /* تغيير رابط "Forget password" إلى اللون الأزرق */
+        margin-left: 170px;
+        display: block;
+        margin-bottom: 5px;
+    }
+      
+        
+
+    
+
+    .create p {
+        margin-top: 15px;
+        color: #fff; /* تغيير النص إلى اللون الأبيض */
+        margin-bottom: 0px;
+    }
+
+    .create a {
+        color: #f3e07d; /* نفس اللون الأصفر في الروابط */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .create a:hover {
+        text-decoration: underline;
+    }
+
+    .create a, .remember-forget a {
+        color: #fff; /* جعل الروابط بيضاء */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container mt-5">
+    <div class="all">
+      <form action="/login" method="POST">
+        <h1>Login</h1>
+        <div class="input1">
+          <input type="text" name="std_id" id="std_id" placeholder="ID Number" required>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input1">
+          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="remember-forget">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+          <a href="#">Forget password</a>
+        </div>
+        <input type="submit" class="sub" value="Login">
+        <div class="create">
+          <p>Don't have an account? <a href="/register"><b>Sign up</b></a></p>
+          <br>
+          <p>Delete your account? 
+            <a href="#" onclick="event.preventDefault(); deleteAccount();">Delete account</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <form id="deleteForm" action="/delete-account" method="POST" style="display: none;">
+    <input type="hidden" name="std_id" id="delete_std_id">
+  </form>
+
+  <script>
+    function deleteAccount() {
+      // الحصول على ID الطالب من حقل التسجيل
+      const std_id = document.getElementById('std_num').value;
+
+      // التحقق إذا كان الـ std_id مُعبأ
+      if (!std_id) {
+        alert("Please enter your ID number first.");
+        return;
+      }
+
+      // تعيين قيمة std_id في النموذج المخفي
+      document.getElementById('delete_std_id').value = std_id;
+
+      // إرسال النموذج لحذف الحساب
+      document.getElementById('deleteForm').submit();
+    }
+  </script>
+
+  <!-- تضمين الفوتر -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>

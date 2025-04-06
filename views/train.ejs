@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Form</title>
+    <!-- Add Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-theme {
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-theme .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            color: #1a237e;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        body.dark-theme h1 {
+            color: #ffffff;
+        }
+
+        h2 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #1a237e;
+            padding-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        body.dark-theme h2 {
+            color: #ffffff;
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #1a237e;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        body.dark-theme label {
+            color: #ffffff;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-theme input[type="text"],
+        body.dark-theme input[type="email"],
+        body.dark-theme input[type="tel"],
+        body.dark-theme input[type="date"],
+        body.dark-theme select,
+        body.dark-theme textarea {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #00b4d8;
+            box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+            outline: none;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-theme input[type="file"] {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        input[type="file"]:hover {
+            border-color: #00b4d8;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .radio-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        body.dark-theme .radio-group label {
+            color: #ffffff;
+        }
+
+        .submit-button,
+        .reset-button {
+            background-color: #1a237e;
+            color: #ffffff;
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 48%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        body.dark-theme .submit-button,
+        body.dark-theme .reset-button {
+            background-color: #00b4d8;
+        }
+
+        .reset-button {
+            background-color: #e53935;
+        }
+
+        body.dark-theme .reset-button {
+            background-color: #e63946;
+        }
+
+        .submit-button:hover {
+            background-color: #0d47a1;
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .submit-button:hover {
+            background-color: #0077b6;
+        }
+
+        .reset-button:hover {
+            background-color: #c62828;
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .reset-button:hover {
+            background-color: #d90429;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #1a237e;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        body.dark-theme .theme-toggle {
+            background-color: #00b4d8;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .material-icons {
+            font-size: 24px;
+        }
+
+        /* Additional Links Section */
+        .additional-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .additional-links a {
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-theme .additional-links a {
+            color: #ffffff;
+        }
+
+        .additional-links a:hover {
+            color: #00b4d8;
+        }
+
+        .additional-links a i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="material-icons">dark_mode</span> <!-- Moon Icon -->
+    </button>
+
+    <div class="container">
+        <h1>Training Form</h1>
+        <form>
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required aria-label="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required aria-label="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required aria-label="Email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required aria-label="Phone Number" pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required aria-label="Address">
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required aria-label="Date of Birth">
+                </div>
+                <div class="form-group">
+                    <label for="Profile">Profile Picture</label>
+                    <input type="file" id="Profile" name="Profile" required aria-label="Profile Picture">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Academic Degree</h2>
+                <div class="form-group">
+                    <label for="degree">Select Academic Degree</label>
+                    <select id="degree" name="degree" required aria-label="Academic Degree">
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Master">Master</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="university">University</label>
+                    <input type="text" id="university" name="university" required aria-label="University">
+                </div>
+                <div class="form-group">
+                    <label for="major">Major</label>
+                    <input type="text" id="major" name="major" required aria-label="Major">
+                </div>
+                <div class="form-group">
+                    <label for="gpa">GPA</label>
+                    <select id="gpa" name="gpa" required aria-label="GPA">
+                        <option value="Satisfactory">Satisfactory</option>
+                        <option value="Good">Good</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Excellent">Excellent</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Training Details</h2>
+                <div class="form-group">
+                    <label for="trainingType">Type of Training</label>
+                    <select id="trainingType" name="trainingType" required aria-label="Type of Training">
+                        <option value="Hardware Services">Hardware Services</option>
+                        <option value="Software Services">Software Services</option>
+                        <option value="Cloud Services">Cloud Services</option>
+                        <option value="Information Technology">Information Technology</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="trainingRequest">Upload University Training Request</label>
+                    <input type="file" id="trainingRequest" name="trainingRequest" required aria-label="University Training Request">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Additional Uploads</h2>
+                <div class="form-group">
+                    <label for="personalID">Upload Personal ID</label>
+                    <input type="file" id="personalID" name="personalID" required aria-label="Personal ID">
+                </div>
+                <div class="form-group">
+                    <label for="transcripts">Upload University Transcripts</label>
+                    <input type="file" id="transcripts" name="transcripts" required aria-label="University Transcripts">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Additional Information</h2>
+                <div class="form-group">
+                    <label for="comments">Comments</label>
+                    <textarea id="comments" name="comments" rows="4" aria-label="Comments"></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-button">Submit Application</button>
+                <button type="reset" class="reset-button">Reset Form</button>
+            </div>
+        </form>
+
+        <!-- Additional Links Section -->
+        <div class="additional-links">
+            <a href="home"><i class="material-icons">home</i>Back to Home</a>
+            <a href="cv.pdf" download><i class="material-icons">description</i>Download CV</a>
+            <a href="companies.html"><i class="material-icons">business</i>Companies</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle dark theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const themeToggle = document.querySelector('.theme-toggle .material-icons');
+            if (document.body.classList.contains('dark-theme')) {
+                themeToggle.textContent = 'light_mode'; // Sun Icon
+            } else {
+                themeToggle.textContent = 'dark_mode'; // Moon Icon
+            }
+        }
+    </script>
+</body>
+</html>

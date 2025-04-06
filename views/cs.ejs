@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Certificates</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #003366 50%, #00aaff 50%);
+            color: white;
+        }
+        header {
+            text-align: center;
+            padding: 2em 1em;
+            background-color: #003366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        .container {
+            margin: 2em auto;
+            padding: 20px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .certificate {
+            background: white;
+            color: #003366;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .certificate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .certificate h2 {
+            font-size: 1.5rem;
+            margin: 1em;
+        }
+        .certificate p {
+            margin: 0.5em 1em;
+            line-height: 1.5;
+        }
+        .certificate strong {
+            color: #00aaff;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1em;
+        }
+        .enroll-btn {
+            padding: 12px;
+            background-color: #00aaff;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 150px;
+        }
+        .enroll-btn:hover {
+            background-color: #003366;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CS Certificates</h1>
+    </header>
+    <div class="container">
+        <div class="certificate">
+            <h2>AWS Certified Solutions Architect</h2>
+            <p><strong>Description:</strong> Learn to design and deploy scalable systems on AWS. This certification demonstrates your expertise in AWS architectural best practices.</p>
+            <p><strong>Duration:</strong> Approximately 2-3 months of study, depending on your prior experience.</p>
+            <p><strong>Cost:</strong> Exam fee is $150.</p>
+            <p><strong>How to Enroll:</strong> Visit the official AWS Certification page, create an account, and schedule your exam. You can find preparation materials and practice tests on the same platform.</p>
+            <div class="button-container">
+                <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Google Professional Cloud Developer</h2>
+            <p><strong>Description:</strong> Build and deploy applications on Google Cloud. This certification validates your skills in cloud-based software development.</p>
+            <p><strong>Duration:</strong> Around 3 months of preparation, including hands-on practice.</p>
+            <p><strong>Cost:</strong> Exam fee is $200.</p>
+            <p><strong>How to Enroll:</strong> Register through the Google Cloud Certification website. Access training materials via Coursera or Qwiklabs for hands-on experience.</p>
+            <div class="button-container">
+                <a href="https://cloud.google.com/certification/cloud-developer" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+        <div class="certificate">
+            <h2>Microsoft Certified: Azure Developer Associate</h2>
+            <p><strong>Description:</strong> Demonstrate your ability to design, build, test, and maintain cloud applications and services on Microsoft Azure.</p>
+            <p><strong>Duration:</strong> Typically requires 1-2 months of preparation, depending on familiarity with Azure.</p>
+            <p><strong>Cost:</strong> Exam fee is $165.</p>
+            <p><strong>How to Enroll:</strong> Go to the Microsoft Learn platform, sign up for the certification exam, and utilize free or paid learning paths provided by Microsoft.</p>
+            <div class="button-container">
+                <a href="https://learn.microsoft.com/en-us/certifications/azure-developer/" class="enroll-btn">Enroll Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
